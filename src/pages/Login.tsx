@@ -21,7 +21,7 @@ export default function Login() {
   return (
     <div className="centered-page">
       <div className="card">
-        <h1>Login</h1>
+        <h1>Login atualizado</h1>
         <form onSubmit={handleLogin}>
           <input
             type="text"

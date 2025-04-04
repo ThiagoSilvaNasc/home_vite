@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fakeAuth } from "../auth/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (fakeAuth.login(username, password)) {
-      localStorage.setItem("auth", "true");
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
       navigate("/");
-    } else {
-      setError("Usuário ou senha incorretos");
+    } catch (err: any) {
+      setError("Email ou senha inválidos");
     }
   };
 
@@ -24,16 +25,16 @@ export default function Login() {
         <h1>Login</h1>
         <form onSubmit={handleLogin}>
           <input
-            type="text"
-            placeholder="Usuário"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
           />
           <button type="submit">Entrar</button>
           {error && <p className="error">{error}</p>}

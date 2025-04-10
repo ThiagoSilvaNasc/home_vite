@@ -65,7 +65,9 @@ export default function Home() {
               <tr>
                 <th>Data/Hora</th>
                 <th>Usuário</th>
+                <th>Cód. Usuário</th>
                 <th>Veículo</th>
+                <th>Cód. Veículo</th>
                 <th>Placa</th>
                 <th>Litros</th>
                 <th>Local</th>
@@ -76,7 +78,9 @@ export default function Home() {
                 <tr key={index}>
                   <td>{evento.timestamp}</td>
                   <td>{evento.usuario}</td>
+                  <td>{evento.CodUsuario}</td>
                   <td>{evento.veiculo}</td>
+                  <td>{evento.CodVeiculo}</td>
                   <td>{evento.PlacaVeiculo}</td>
                   <td>{evento.litros}</td>
                   <td>{evento.local}</td>
@@ -89,6 +93,7 @@ export default function Home() {
     </div>
   );
 }
+
 const styles = {
   container: {
     height: "100vh",
@@ -122,7 +127,7 @@ const styles = {
     overflow: "hidden",
     display: "flex",
     flexDirection: "column" as const,
-    alignItems: "flex-start" as const, // alinha título e tabela à esquerda
+    alignItems: "flex-start" as const,
   },
   title: {
     fontSize: "1.75rem",
